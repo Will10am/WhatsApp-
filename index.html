@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpiderChat</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#080808;
+    color:white;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* TOILE */
+.web{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.08;
+    background:
+      repeating-radial-gradient(
+        circle at 50% 50%,
+        transparent 0 35px,
+        #fff 36px 37px
+      );
+}
+
+/* HEADER */
+header{
+    height:70px;
+    background:linear-gradient(135deg,#080808,#170000);
+    border-bottom:1px solid #b40000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    position:relative;
+    z-index:2;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:#e00000;
+}
+
+.spider{
+    font-size:27px;
+}
+
+/* RECHERCHE */
+.search{
+    padding:12px;
+    background:#111;
+    border-bottom:1px solid #222;
+}
+
+.search input{
+    width:100%;
+    padding:12px 15px;
+    border:none;
+    outline:none;
+    border-radius:20px;
+    background:#202020;
+    color:white;
+}
+
+/* CONTACTS */
+.contacts{
+    height:calc(100vh - 125px);
+    overflow-y:auto;
+    position:relative;
+    z-index:1;
+}
+
+.contact{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:14px;
+    border-bottom:1px solid #181818;
+    cursor:pointer;
+}
+
+.contact:hover{
+    background:#151515;
+}
+
+.avatar{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#d40000,#250000);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    border:2px solid #c00000;
+}
+
+.info{
+    flex:1;
+}
+
+.name{
+    font-weight:bold;
+}
+
+.last{
+    color:#888;
+    font-size:13px;
+    margin-top:4px;
+}
+
+.time{
+    color:#777;
+    font-size:11px;
+}
+
+/* NAVIGATION */
+nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:55px;
+    background:#0b0b0b;
+    border-top:1px solid #300000;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    z-index:5;
+}
+
+nav button{
+    background:none;
+    border:none;
+    color:#777;
+    font-size:13px;
+}
+
+nav button.active{
+    color:#e00000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="web"></div>
+
+<header>
+    <div class="logo">SPIDER<span>CHAT</span></div>
+    <div class="spider">🕷</div>
+</header>
+
+<div class="search">
+    <input
+      type="text"
+      id="search"
+      placeholder="Rechercher une discussion..."
+      onkeyup="searchContact()"
+    >
+</div>
+
+<div class="contacts" id="contacts">
+
+    <div class="contact" onclick="openChat('Zeinab')">
+        <div class="avatar">Z</div>
+        <div class="info">
+            <div class="name">Zeinab</div>
+            <div class="last">T'es encore là toi ?</div>
+        </div>
+        <div class="time">06:42</div>
+    </div>
+
+    <div class="contact" onclick="openChat('Flavianna')">
+        <div class="avatar">F</div>
+        <div class="info">
+            <div class="name">Flavianna</div>
+            <div class="last">Tu me manques...</div>
+        </div>
+        <div class="time">Hier</div>
+    </div>
+
+    <div class="contact" onclick="openChat('Anifa')">
+        <div class="avatar">A</div>
+        <div class="info">
+            <div class="name">Anifa</div>
+            <div class="last">Mdrrr</div>
+        </div>
+        <div class="time">Hier</div>
+    </div>
+
+</div>
+
+<nav>
+    <button class="active">Chats</button>
+    <button>Statuts</button>
+    <button>Appels</button>
+    <button>Réglages</button>
+</nav>
+
+<script>
+
+function searchContact(){
+
+    let value =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    document.querySelectorAll(".contact")
+    .forEach(contact => {
+
+        let name =
+            contact.querySelector(".name")
+            .textContent
+            .toLowerCase();
+
+        contact.style.display =
+            name.includes(value)
+            ? "flex"
+            : "none";
+    });
+}
+
+function openChat(name){
+
+    alert(
+        "Ouverture de la discussion avec " +
+        name +
+        " 🕷"
+    );
+}
+
+</script>
+
+</body>
+  </html>
